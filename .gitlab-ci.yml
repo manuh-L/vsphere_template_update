@@ -29,5 +29,5 @@ build-rename:
   tags:
     - local
   script:
-    - pip install Pyvmomi
+#    - pip install Pyvmomi
     - ansible-playbook template-rename.yml -v
