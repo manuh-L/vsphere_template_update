@@ -23,3 +23,17 @@
         name: dandy
         groups: admin
         comment: "1 of admins users"
+
+
+    - name: Creating local user
+      user:
+        name: Ronaldo
+        groups: admin
+        comment: "1 of admins users"
+
+
+    - name: Creating local user
+      user:
+        name: Super
+        groups: admin
+        comment: "1 of admins users"
