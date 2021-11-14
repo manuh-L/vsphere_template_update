@@ -14,7 +14,7 @@ source "vsphere-clone" "MGlobal" {
   username            = "administrator@vsphere.local"
   vcenter_server      = "vcsa-01.lab.com"
   cluster             = "Tanzu-Cluster"
-  vm_name             = "TMP-CentOS8-${local.timestamp}"
+  vm_name             = "TMP-latest"
 #  convert_to_template = "true"
   ssh_username        = "root"
   ssh_password        = "Password1"
