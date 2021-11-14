@@ -12,7 +12,7 @@ validate:
     - ansible --version
     - packer validate vsphere.pkr.hcl
 
-build:
+build-image:
   stage: build
   environment:
     name: test
@@ -29,4 +29,5 @@ build-rename:
   tags:
     - local
   script:
-    - ansible-playbook template-rename.yml
+    - pip install Pyvmomi
+    - ansible-playbook template-rename.yml -v
