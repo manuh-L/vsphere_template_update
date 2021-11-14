@@ -1,0 +1,60 @@
+---
+- name: Rename virtual machine from old name to new name using UUID
+  gather_facts: yes
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python3"
+    template_name: "TMP-CentOS8"
+  hosts: localhost
+  tasks:
+    - set_fact:
+        vm_name: "TMP-latest"
+        new_vm_name: "TMP-{{ ansible_date_time.date }}-{{ ansible_date_time.time }}"
+        datacenter: "MGlobal"
+        cluster_name: "Tanzu-Cluster"
+
+    - name: Get Template "{{ template_name }}" uuid
+      vmware_guest_facts:
+        hostname: "vcsa-01.lab.com"
+        username: "administrator@vsphere.local"
+        password: "Password1!"
+        validate_certs: False
+        datacenter: "{{ datacenter }}"
+        folder: "/{{datacenter}}/vm"
+        name: "{{ template_name }}"
+      register: vm_facts
+
+    - name: Rename "{{ template_name }}" to "{{ new_vm_name }}"
+      vmware_guest:
+        hostname: "vcsa-01.lab.com"
+        username: "administrator@vsphere.local"
+        password: "Password1!"
+        validate_certs: False
+        datacenter: "{{ datacenter }}"
+        cluster: "{{ cluster_name }}"
+        uuid: "{{ vm_facts.instance.hw_product_uuid }}"
+        name: "{{ new_vm_name }}"
+        is_template: yes
+
+##############Set new Template ##################
+    - name: Get new Template "{{ vm_name }}" uuid
+      vmware_guest_facts:
+        hostname: "vcsa-01.lab.com"
+        username: "administrator@vsphere.local"
+        password: "Password1!"
+        validate_certs: False
+        datacenter: "{{ datacenter }}"
+        folder: "/{{datacenter}}/vm"
+        name: "{{ vm_name }}"
+      register: vm_facts
+
+    - name: Rename "{{ vm_name }}" to "{{ template_name }}"
+      vmware_guest:
+        hostname: "vcsa-01.lab.com"
+        username: "administrator@vsphere.local"
+        password: "Password1!"
+        validate_certs: False
+        datacenter: "{{ datacenter }}"
+        cluster: "{{ cluster_name }}"
+        uuid: "{{ vm_facts.instance.hw_product_uuid }}"
+        name: "{{ template_name }}"
+        is_template: yes
