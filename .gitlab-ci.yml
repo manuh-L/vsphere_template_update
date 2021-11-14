@@ -8,13 +8,14 @@ IaC:
     - packer --version
     - ansible --version
     - packer validate vsphere.pkr.hcl
+    - ansible-playbook default-config.yml --syntax-check
     - ansible-playbook template-rename.yml --syntax-check 
   rules:
     - exists:
         - vsphere.pkr.hcl
         - template-rename.yml
 
-template:
+create-template:
   stage: build
   tags:
     - local
@@ -22,7 +23,7 @@ template:
     - packer build -force vsphere.pkr.hcl
 
 
-rename:
+reorganize-templates:
   stage: build
   tags:
     - local
