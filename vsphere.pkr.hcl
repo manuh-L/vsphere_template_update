@@ -15,7 +15,8 @@ source "vsphere-clone" "MGlobal" {
   vcenter_server      = "vcsa-01.lab.com"
   cluster             = "Tanzu-Cluster"
   vm_name             = "TMP-latest"
-#  convert_to_template = "true"
+  notes               = "Template created on ${local.timestamp}"
+  convert_to_template = "true"
   ssh_username        = "root"
   ssh_password        = "Password1"
 }
