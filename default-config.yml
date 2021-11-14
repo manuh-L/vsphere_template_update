@@ -1,0 +1,25 @@
+---
+
+- hosts: all
+  become: true
+#  become_user: root
+#  become_method: sudo
+#  connection: ssh
+  gather_facts: yes
+
+  tasks:
+#    - name: Patching
+#      yum:
+#        name: '*'
+#        state: latest
+
+    - name: Add admin group
+      group:
+        name: admin
+        state: present
+
+    - name: Creating local user
+      user:
+        name: dandy
+        groups: admin
+        comment: "1 of admins users"
