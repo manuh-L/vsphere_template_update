@@ -2,21 +2,12 @@ stages:
   - validate
   - build
 
-#cache:
-#  paths:
-#    - packer
-
 
 validate:
   stage: validate
   environment:
     name: test
   script:
-    - echo $AWS_ACCESS_KEY
-    - echo $AWS_SECRET_KEY
-    - echo $AWS_DEFAULT_REGION
-    - echo $AWS_SOURCE_AMI
-    - ls -l
     - packer --version
     - ansible --version
     - packer validate vsphere.pkr.hcl
@@ -29,4 +20,13 @@ build:
     - local
   script:
     - pwd
-    - packer build vsphere.pkr.hcl
+    - packer build -force vsphere.pkr.hcl
+
+build-rename:
+  stage: build
+  environment:
+    name: test
+  tags:
+    - local
+  script:
+    - ansible-playbook template-rename.yml
