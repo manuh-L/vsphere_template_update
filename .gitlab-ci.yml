@@ -31,3 +31,5 @@ reorganize-templates:
     - local
   script:
     - ansible-playbook template-rename.yml
+  needs:
+    - create-template  
