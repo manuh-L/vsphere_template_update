@@ -32,4 +32,4 @@ reorganize-templates:
   script:
     - ansible-playbook template-rename.yml
   needs:
-    - create-template  
+    - IaC 
