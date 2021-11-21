@@ -21,6 +21,8 @@ create-template:
     - local
   script:
     - packer build -force vsphere.pkr.hcl
+  needs:
+    - IaC
 
 
 reorganize-templates:
