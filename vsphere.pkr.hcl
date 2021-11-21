@@ -28,7 +28,7 @@ build {
   sources = ["source.vsphere-clone.MGlobal"]
 
   provisioner "shell-local" {
-    inline = ["ip a", "echo HELLO"]
+    inline = ["ip a", "hostname"]
   }
 
   provisioner "ansible" {
