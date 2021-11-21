@@ -1,6 +1,7 @@
 stages:
   - validate
   - build
+  - reorganize
 
 IaC:
   stage: validate
@@ -20,12 +21,15 @@ create-template:
   tags:
     - local
   script:
-    - packer build -force vsphere.pkr.hcl
-
+    - packer build vsphere.pkr.hcl
+  needs:
+    - IaC
 
 reorganize-templates:
-  stage: build
+  stage: reorganize
   tags:
     - local
   script:
     - ansible-playbook template-rename.yml
+  needs:
+    - create-template
