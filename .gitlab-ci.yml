@@ -21,8 +21,6 @@ create-template:
     - local
   script:
     - packer build -force vsphere.pkr.hcl
-  needs:
-    - IaC
 
 
 reorganize-templates:
@@ -31,5 +29,3 @@ reorganize-templates:
     - local
   script:
     - ansible-playbook template-rename.yml
-  needs:
-    - IaC 
