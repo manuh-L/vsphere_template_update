@@ -3,12 +3,15 @@
 - hosts: all
   become: true
   gather_facts: no
+  vars_files:
+    - input.yml
 
   tasks:
 #    - name: Patching
 #      yum:
 #        name: '*'
 #        state: latest
+#       when: update == "yes"
 
     - name: Add admin group
       group:

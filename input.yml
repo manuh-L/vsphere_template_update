@@ -1,0 +1,24 @@
+---
+
+####################################OS #####################################
+update: yes
+
+groups_to_be_created:
+
+users_to_be_created:
+- {name: sftp-no_mediation, groups: local-sftp, comment: "test sem mediation", shell: /sbin/nologin}
+
+
+####################################VCENTER #####################################
+template_name: "TMP-CentOS8"
+
+vm_name: "TMP-latest"
+datacenter: "MGlobal"
+cluster_name: "Tanzu-Cluster"
+vcenter: "vcsa-01.lab.com"
+
+#new_vm_name: "TMP-{{ ansible_date_time.date }}-{{ ansible_date_time.time }}"
+#colocar como env
+
+#vc_user: "administrator@vsphere.local"
+#vc_password: "Password1!"

@@ -1,16 +1,20 @@
 ---
 - name: Rename virtual machine from old name to new name using UUID
   gather_facts: yes
+  vars_files:
+    - input.yml
   vars:
-#    ansible_python_interpreter: "/usr/bin/env python3"
-    template_name: "TMP-CentOS8"
+#    vcenter: "{{ lookup('env','VCENTER') }}"
+    vc_user: "{{ lookup('env','VC_USER') }}"
+    vc_passwd: "{{ lookup('env','VC_PASSWD') }}"
+#    template_name: "TMP-CentOS8"
   hosts: localhost
   tasks:
     - set_fact:
-        vm_name: "TMP-latest"
+#        vm_name: "{{ vm_name }}"
         new_vm_name: "TMP-{{ ansible_date_time.date }}-{{ ansible_date_time.time }}"
-        datacenter: "MGlobal"
-        cluster_name: "Tanzu-Cluster"
+#        datacenter: "{{ datacenter }}"
+#        cluster_name: "{{ cluster_name }}"
 
     - name: Get Template "{{ template_name }}" uuid
       vmware_guest_facts:
@@ -25,9 +29,9 @@
 
     - name: Rename "{{ template_name }}" to "{{ new_vm_name }}"
       vmware_guest:
-        hostname: "vcsa-01.lab.com"
-        username: "administrator@vsphere.local"
-        password: "Password1!"
+        hostname: "{{ vcenter }}"
+        username: "{{ vc_user }}"
+        password: "{{ vc_passwd }}"
         validate_certs: False
         datacenter: "{{ datacenter }}"
         cluster: "{{ cluster_name }}"
@@ -38,9 +42,9 @@
 ##############Set new Template ##################
     - name: Get new Template "{{ vm_name }}" uuid
       vmware_guest_facts:
-        hostname: "vcsa-01.lab.com"
-        username: "administrator@vsphere.local"
-        password: "Password1!"
+        hostname: "{{ vcenter }}"
+        username: "{{ vc_user }}"
+        password: "{{ vc_passwd }}"
         validate_certs: False
         datacenter: "{{ datacenter }}"
         folder: "/{{datacenter}}/vm"
@@ -49,9 +53,9 @@
 
     - name: Rename "{{ vm_name }}" to "{{ template_name }}"
       vmware_guest:
-        hostname: "vcsa-01.lab.com"
-        username: "administrator@vsphere.local"
-        password: "Password1!"
+        hostname: "{{ vcenter }}"
+        username: "{{ vc_user }}"
+        password: "{{ vc_passwd }}"
         validate_certs: False
         datacenter: "{{ datacenter }}"
         cluster: "{{ cluster_name }}"
