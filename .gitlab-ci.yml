@@ -11,6 +11,8 @@ IaC:
     - packer validate vsphere.pkr.hcl
     - ansible-playbook default-config.yml --syntax-check
     - ansible-playbook template-rename.yml --syntax-check 
+    - echo $VC_PASSWD
+    - echo $VC_USER
   rules:
     - exists:
         - vsphere.pkr.hcl
