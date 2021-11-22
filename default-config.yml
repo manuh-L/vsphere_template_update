@@ -8,13 +8,13 @@
 
   tasks:
     - set_fact:
-        update: "yes"
-          
+        update1: "yes"
+
     - name: Update OS
       yum:
         name: '*'
         state: latest
-      when: yes == "{{ update }}"
+      when: '{{ update1 }} == {{ update }}'
 
     - name: Create groups
       ansible.builtin.group:
