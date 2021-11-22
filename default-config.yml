@@ -21,7 +21,7 @@
   
     - name: Create local Users
       user:
-        name: "{{ item.username }}"
+        name: "{{ item.name }}"
         groups: "{{ item.groups }}"
         shell:  "{{ item.shell }}"
         comment: "{{ item.comment }}"
