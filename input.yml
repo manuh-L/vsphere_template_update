@@ -4,9 +4,13 @@
 update: yes
 
 groups_to_be_created:
+- {name: local}
+- {name: admins}
 
 users_to_be_created:
-- {name: sftp-no_mediation, groups: local-sftp, comment: "test sem mediation", shell: /sbin/nologin}
+- {name: app-01, groups: local, comment: "local for app-01", shell: /sbin/nologin}
+- {name: Dandy, groups: admins, comment: "1 of Admins", shell: /bin/bash}
+- {name: master-01, groups: admins, comment: "master", shell: /bin/bash}
 
 
 ####################################VCENTER #####################################

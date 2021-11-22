@@ -7,33 +7,25 @@
     - input.yml
 
   tasks:
-#    - name: Patching
-#      yum:
-#        name: '*'
-#        state: latest
-#       when: update == "yes"
+    - name: Update OS
+      yum:
+        name: '*'
+        state: latest
+      when: update == "yes"
 
-    - name: Add admin group
-      group:
-        name: admin
+    - name: Create groups
+      ansible.builtin.group:
+        name: "{{ item.name }}"
         state: present
-
-    - name: Creating local user
+      with_items: "{{ groups_to_be_created }}"
+  
+    - name: Create local Users
       user:
-        name: dandy
-        groups: admin
-        comment: "1 of admins users"
-
-
-    - name: Creating local user
-      user:
-        name: Ronaldo
-        groups: admin
-        comment: "1 of admins users"
-
-
-    - name: Creating local user
-      user:
-        name: Super
-        groups: admin
-        comment: "1 of admins users"
+        name: "{{ item.username }}"
+        groups: "{{ item.groups }}"
+        shell:  "{{ item.shell }}"
+        comment: "{{ item.comment }}"
+        password: "{{ 'Password1' | password_hash('sha512') }}"
+        update_password: on_create
+        append: yes
+      with_items: "{{ users_to_be_created }}"
