@@ -10,10 +10,10 @@
  #   - set_fact:
  #       update1: "yes"
 
-    - name: Update OS
-      yum:
-        name: '*'
-        state: latest
+#    - name: Update OS
+#      yum:
+#        name: '*'
+#        state: latest
  #     when: "yes == {{ update }}"
 
     - name: Create groups
