@@ -7,14 +7,14 @@
     - input.yml
 
   tasks:
-    - set_fact:
-        update1: "yes"
+ #   - set_fact:
+ #       update1: "yes"
 
     - name: Update OS
       yum:
         name: '*'
         state: latest
-      when: '{{ update1 }} == {{ update }}'
+ #     when: "yes == {{ update }}"
 
     - name: Create groups
       ansible.builtin.group:
