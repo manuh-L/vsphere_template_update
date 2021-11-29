@@ -13,4 +13,4 @@ Variable file for all the playbooks
 Ansible playbook to rename the latest template to "TMP-CentOS8" during the execution of the pipeline
 
 # vsphere.pkr.hcl
-Is the Packer IaC file, contains the code to clone the template embeeded with ansible provisioner to update the OS and other OS configs & hardening
+Is the Packer IaC file, contains the code to clone the template with embeeded ansible provisioner to update the OS and other OS configs & hardening
