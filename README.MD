@@ -7,7 +7,7 @@ The gitlab CI/CD pipeline file with all the stages and jobs
 Playbook for OS configuration & hardening
 
 # input.yml
-Variable file for all the playbooks
+File with all the variables for the playbooks
 
 # template-rename.yml
 Ansible playbook to rename the latest template to "TMP-CentOS8" during the execution of the pipeline
