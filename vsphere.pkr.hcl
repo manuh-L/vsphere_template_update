@@ -22,6 +22,7 @@ source "vsphere-clone" "MGlobal" {
 build {
   sources = ["source.vsphere-clone.MGlobal"]
 
+#https://www.packer.io/docs/provisioners
   provisioner "shell-local" {
     inline = ["ip a", "hostname"]
   }
