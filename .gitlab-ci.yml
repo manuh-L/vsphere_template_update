@@ -32,6 +32,7 @@ reorganize-templates:
   tags:
     - local
   script:
+    - pip install Pyvmomi
     - ansible-playbook template-rename.yml
   needs:
     - create-template
